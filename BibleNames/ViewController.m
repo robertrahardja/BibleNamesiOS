@@ -23,7 +23,7 @@
     
     
     // Do any additional setup after loading the view, typically from a nib.
-    self.dict = @{  @"Jarvah": @"breathing",
+   /* self.dict = @{  @"Jarvah": @"breathing",
                     @"Mishal": @" parables governing",
                     @"Pagiel": @"",
                     @"Matri": @"",
@@ -2670,11 +2670,40 @@
                     @"Hezir": @"( A bog, converted, swine or protected)(?)",
                     @"Happizzez": @"The Scattering. Dispersion",
                     @"Maziah": @"consolation of Iesus"
-};
+    }
+    */
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //NSLog(@"Downloading Started");
+        NSString *urlToDownload = @"https://raw.githubusercontent.com/robertrahardja/BibleNamesDictionary/master/BibleNamesPlist.plist";
+        NSURL  *url = [NSURL URLWithString:urlToDownload];
+        //NSString *urlString = url.absoluteString;
+        //NSData *urlData = [NSData dataWithContentsOfURL:url];
+        //NSString *urlString = [NSString stringWithUTF8String:[urlData bytes]];
     
 
+  
     
-}
+    if ( url )
+        {
+
+            
+            self.dict = [NSDictionary dictionaryWithContentsOfURL:url];
+           /*
+            for (id key in self.dict) {
+                NSLog(@"key: %@, value: %@ \n", key, [self.dict objectForKey:key]);
+            }
+            */
+        }
+    
+    });
+     
+};
+
+
+    
+
 
 - (IBAction)TranslateButton:(id)sender {
     //_OutputText.text = _InputText.text;
